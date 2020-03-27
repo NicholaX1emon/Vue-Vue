@@ -26,12 +26,7 @@ const store = {
     }
   },
   actions: {
-    // getLazyDogList(context) {
-
-    // },
-    // getLazyDogListSuccess({state, commit, rootState}) {
-
-    // },
+    
   },
 }
 

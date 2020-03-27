@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import lazydog from './lazydog'
 import uglydog from './uglydog'
-
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -12,7 +12,8 @@ const store = new Vuex.Store({
     uglydog,
   },
   state: {
-    count: 3
+    count: 3,
+    topic_list: []
   },
   getters: { // cached global computed state
     totalDogCount(state) {
@@ -20,20 +21,37 @@ const store = new Vuex.Store({
     }
   },
   mutations: { // reducer
+    globalIncreaseDog(state, payload) {
+      state.lazydog.count += payload.amount
+      state.uglydog.count += payload.amount
+    },
+    globalDecreaseDog(state, { amount }) {
+      state.lazydog.count -= amount
+      state.uglydog.count -= amount
+    },
+    getTopicListSuccess(state, payload) {
+      state.topic_list = payload.data
+    }
   },
   actions: { // async logic here, use store.dispatch() to call async method, finally call store.commit() to update state
+    async callAnotherAction(context_store, timeout) {
+      const { dispatch } = context_store
+      console.log('--- before async operation ---')
+      await dispatch('getTopicList', timeout) // call another action inside one action, continue if it's done
+      console.log('--- after async operation ---')
+    },
+    async getTopicList({commit}, payload) {
+      console.log('timeout ---', payload)
+      try {
+        const res = await axios.get('/mock/data.json', {
+          timeout: payload,
+        })
+        commit('getTopicListSuccess', res)
+      } catch(err) {
+        console.log('err ---', err)
+      }
+    },
   },
 })
-
-// store.commit('increaseLazyDogBy', {amount: 5})
-// store.commit('increaseUglyDogBy', {amount: 5})
-// console.log('lazydog state count ---', store.state.lazydog.count)
-// console.log('ugly state count ---', store.state.uglydog.count)
-// console.log('rootState getters totalDogCount ---', store.getters.totalDogCount)
-
-// store.commit('increaseLazyDogBy', {amount: 5})
-// console.log('lazydog mutation increaseLazyDogBy 5 ---', store.state.count)
-// console.log('lazydog getter handsomeLazyDog---', store.getters.handsomeLazyDog)
-// console.log('lazydog getter handsomeLazyDogCount ---', store.getters.handsomeLazyDogCount)
 
 export default store

@@ -16,52 +16,52 @@ export default {
     
   },
   created() {
-    const request_payload = {
-      title: 'Angular',
-      id: 3,
-    }
+    // const request_payload = {
+    //   title: 'Angular',
+    //   id: 3,
+    // }
 
     const formData = new FormData()
     formData.append('title', 'Angular')
     formData.append('id', 3)
 
-    this.$axios.get('/mock/data.json')
-      .then(res => {
-        const { data, status } = res
-        if (status === 200) {
-          console.log('data ---', data)
-        }
-      })
+    // this.$axios.get('/mock/data.json')
+    // .then(res => {
+    //   const { data, status } = res
+    //   if (status === 200) {
+    //     console.log('data ---', data)
+    //   }
+    // })
 
-    this.$axios.post('/mock/post/', request_payload)
-      .then(res => {
-        const { data, status } = res
-        if (status === 200) {
-          console.log('data ---', data)
-        }
-      })
+    // this.$axios.post('/mock/post/', request_payload)
+    // .then(res => {
+    //   const { data, status } = res
+    //   if (status === 200) {
+    //     console.log('data ---', data)
+    //   }
+    // })
 
-    this.$axios.post('/mock/post/', formData)
-    .then(res => {
-      const { data, status } = res
-      if (status === 200) {
-        console.log('data ---', data)
-      }
-    })
+    // this.$axios.post('/mock/post/', formData)
+    // .then(res => {
+    //   const { data, status } = res
+    //   if (status === 200) {
+    //     console.log('data ---', data)
+    //   }
+    // })
 
-    this.$axios.delete('/mock/delete/', { // query string
-      params: request_payload
-    })
-      .then(res => {
-        console.log('res ---', res)
-      })
+    // this.$axios.delete('/mock/delete/', { // query string
+    //   params: request_payload
+    // })
+    // .then(res => {
+    //   console.log('res ---', res)
+    // })
 
-    this.$axios.delete('/mock/delete/', { // request body
-      data: request_payload
-    })
-      .then(res => {
-        console.log('res ---', res)
-      })
+    // this.$axios.delete('/mock/delete/', { // request body
+    //   data: request_payload
+    // })
+    // .then(res => {
+    //   console.log('res ---', res)
+    // })
   }
 }
 </script>

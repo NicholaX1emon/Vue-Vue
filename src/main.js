@@ -12,12 +12,13 @@ axios.interceptors.request.use((config) => {
     ...config.headers,
     token: '12321edanrh324n3211312321'
   }
+  return config
 }, (err) => {
   return err
 })
 
 axios.interceptors.response.use((res) => {
-  console.log('response interceptor ----', res)
+  return res
 }, (err) => {
   return err
 })

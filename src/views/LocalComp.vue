@@ -9,7 +9,10 @@
       :fontSize="global_fontsize"
       @customEnlargeEvent="customEnlargeEvent" 
     >
-      我是slot aka children -- global
+      <!-- v-slot:[slot-name]='slot-props-name' 通过插槽props获取子组件传递的值 -->
+      <template v-slot:slot_props_name_from_child='item'>
+        <h3>global $slot.other_slot --- {{item.name}}</h3>
+      </template>
     </global>
   </div>
 </template>
@@ -35,6 +38,9 @@ const local = Vue.component('local', {
         'cx-true': true,
         'cx-false': false,
       }],
+      style: {
+        backgroundColor: 'yellow'
+      },
       on: {
         click: () => alert('local alert')
       }
@@ -50,6 +56,9 @@ const global = Vue.component('global', {
     customEnlargeEvent: Function,
     fontSize: Number,
   },
+  mounted() {
+    console.log('this ---', this)
+  },
   methods: {
     emitEnlargeEvent() {
       this.$emit('customEnlargeEvent', 5) // emit custom event
@@ -57,11 +66,16 @@ const global = Vue.component('global', {
   },
   render() { 
     return (
-      <div>
+      <div style={{backgroundColor: 'lightblue'}}>
         <h1 style={{fontSize: `${this.fontSize}px`}}>
           {this.global_greetings}
         </h1>
         <button onClick={this.emitEnlargeEvent}>加大字号+</button>
+        <div>
+          {this.$scopedSlots.slot_props_name_from_child({ // 使用作用域插槽 使得子组件的值能传递到父组件调用
+            name: 'im slot props'
+          })}
+        </div>
       </div>
     )
   },
@@ -78,6 +92,7 @@ export default {
       local_greetings: 'hahahahahahahahah im local-comp',
       global_greetings: 'xixixixixixixixix im global-comp',
       global_fontsize: 14,
+      global_slot_props: 'im slot props'
     }
   },
   mounted() {

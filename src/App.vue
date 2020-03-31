@@ -1,19 +1,24 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png"> 
+    <img alt="Vue logo" src="./assets/logo.png">
+    <div>
+      <!-- 使用v-bind 以调用js表达式  -->
+      <router-link :to="{path: '/local_comp', query: { id: 123 }}">组件基础</router-link>
+    </div>
+    <div>
+      <router-link to="/vuex">Vuex</router-link>
+    </div>
     <router-view/>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'Home',
   props: {
     name: String
   },
   components: {
-    
   },
   created() {
     // const request_payload = {

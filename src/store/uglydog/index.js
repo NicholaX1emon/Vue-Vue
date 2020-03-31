@@ -1,5 +1,5 @@
 const store = {
-  namespace: true, // namespace needed as prefix to access inner attributes
+  namespaced: true, // namespace needed as prefix to access inner attributes
   state: {
     dogs: [
       {name: 'quin', type: 'clever', age: 33},

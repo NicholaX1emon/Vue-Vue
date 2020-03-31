@@ -9,7 +9,7 @@ const store = {
     ],
     count: 0,
   },
-  getters: { 
+  getters: { // getters & mutations & actions registerd as global by default
     handsomeLazyDog: state => {
       return state.dogs.filter(dog => dog.type === 'handsome')
     },

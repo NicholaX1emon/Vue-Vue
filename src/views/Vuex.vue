@@ -53,8 +53,8 @@ export default {
     ...mapMutations({
       increaseLazyDogBy: 'increaseLazyDogBy', // non-namespace mutation, directly called
       decreaseLazyDogBy: 'decreaseLazyDogBy',
-      increaseUglyDogBy: 'increaseUglyDogBy', // mutation with namespace
-      decreaseUglyDogBy: 'decreaseUglyDogBy',
+      increaseUglyDogBy: 'uglydog/increaseUglyDogBy', // mutation with namespace
+      decreaseUglyDogBy: 'uglydog/decreaseUglyDogBy',
       globalIncreaseDog: 'globalIncreaseDog', // global mutation
       globalDecreaseDog: 'globalDecreaseDog',
     }),
